@@ -7,10 +7,22 @@
         <title>Солнечная система</title>
     </head>
     <body>
-       <section class="clearfix">
+        <section class="clearfix">
             <ul class="solarsystem">
-              <li class="sun"><a href="#sun"><span>Солнце</span></a></li>
-              <li class="earth"><a href="#earth"><span>Земля<span class="moon"> &amp; Moon</span></span></a></li>
+
+                <li class="sun">
+                    <a href="#sun">
+                        <span>Солнце</span>
+                    </a>
+                </li>
+
+                {% for planet in object_list %}
+                    <li class="{{ planet.code }}">
+                        <a href="#{{ planet.code }}">
+                            <span>{{ planet.name }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
 
             <ul id="descriptions">
@@ -25,15 +37,13 @@
                         на более ранних стадиях развития его яркость составляла лишь 70 % от сегодняшне
                     </p>
                 </li>
-                <li>
-                    <h2 id="earth">Земля</h2>
-                    <p>
-                        Среди планет земной группы Земля является уникальной
-                        (прежде всего, за счет гидросферы).
-                        Атмосфера Земли радикально отличается от атмосфер других планет —
-                        она содержит свободный кислород.
-                        У Земли есть один естественный спутник — Луна</p>
-                </li>
+                {% for planet in object_list %}
+                    <li class="{{ planet.code }}">
+                        <h2 id="{{ planet.code }}">{{ planet.name }}</h2>
+                        <p>{{ planet.description }}"</p>
+                    </li>
+                {% endfor %}
+
             </ul>
         </section>
     </body>
