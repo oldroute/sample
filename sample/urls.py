@@ -1,11 +1,18 @@
-from django.views.generic import ListView
 from django.contrib import admin
 from django.urls import path
 from sample.models import Planet
+from .serializers import PlanetSerializer
+
+
+from rest_framework.generics import ListAPIView
+
 
 admin.site.site_header = 'Солнечная система'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', ListView.as_view(template_name='index.html', model=Planet))
+    path('api/', ListAPIView.as_view(
+        queryset=Planet.objects.all(),
+        serializer_class=PlanetSerializer)
+    )
 ]
